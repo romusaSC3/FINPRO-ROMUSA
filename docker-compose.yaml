@@ -1,0 +1,27 @@
+# create your docker-compose here
+
+version: "3.3"
+services:
+    library:
+        container_name: "library"
+        build: "."
+        ports:
+            - "5000:5000"
+
+        environment: 
+            - .env
+        depends_on:
+            - "library-db"
+
+    library-db:
+        container_name: "library-db"
+        image: "postgres"
+        ports:
+            - "5432:5432"
+        # environment: 
+        #     - .env
+        environment:
+          POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+# networks:
+#     library: 
